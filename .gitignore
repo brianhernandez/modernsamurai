@@ -79,3 +79,9 @@ dist
 
 # IDE
 .idea
+
+# Firebase
+.firebaserc
+.firebase
+database.rules.json
+firebase.json
