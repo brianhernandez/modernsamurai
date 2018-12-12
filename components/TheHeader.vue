@@ -30,7 +30,7 @@
         <b-nav-item-dropdown
           v-if="authenticated"
           :text="user"
-          center>
+          right>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item href="#">Logout</b-dropdown-item>
         </b-nav-item-dropdown>
@@ -43,8 +43,7 @@
 export default {
   computed: {
     authenticated() {
-      return false
-      // return this.$store.getters.isAuthenticated
+      return this.$store.getters.isAuthenticated
     },
     user() {
       return 'Brian'

@@ -24,6 +24,7 @@
       </section>
     </header>
     <section>Section Here</section>
+
     <footer>Footer Here</footer>
     <div/>
 </div></template>
