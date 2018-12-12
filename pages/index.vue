@@ -1,30 +1,36 @@
 <template>
   <div>
-    <header class="index-main">
+    <header class="index-header">
       <section class="container">
         <div>
-          <logo/>
           <h1 class="title">
-            modernsamurai.io
+            ModernSamurai.io
           </h1>
           <h2 class="subtitle">
             My outstanding Nuxt.js project
           </h2>
           <div class="links">
-            <a
+            <!-- <a
               href="https://nuxtjs.org/"
               target="_blank"
               class="button--green">Documentation</a>
             <a
               href="https://github.com/nuxt/nuxt.js"
               target="_blank"
-              class="button--grey">GitHub</a>
+              class="button--grey">GitHub</a> -->
+            <b-button
+              to="/login"
+              size="lg"
+              class="index-header__button">Login</b-button>
+            <b-button
+              to="/signup"
+              size="lg"
+              class="index-header__button">Signup</b-button>
           </div>
         </div>
       </section>
     </header>
     <section>Section Here</section>
-
     <footer>Footer Here</footer>
     <div/>
 </div></template>
@@ -40,8 +46,19 @@ export default {
 </script>
 
 <style>
-.index-main {
-  background-color: grey;
+.index-header {
+  background: grey url('~assets/img/zen_garden.jpg') no-repeat fixed;
+  background-size: cover;
+}
+
+.index-header__button {
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 0;
+}
+
+.index-header__button:hover {
+  /* background-color: rgba(255, 255, 255, 0.75); */
 }
 
 .container {
@@ -58,7 +75,7 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: #35495e;
+  color: white;
   letter-spacing: 1px;
 }
 
