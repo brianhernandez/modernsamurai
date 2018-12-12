@@ -1,8 +1,20 @@
 <template>
   <div>
+    <TheHeader />
     <nuxt/>
   </div>
 </template>
+
+<script>
+import TheHeader from '~/components/TheHeader'
+
+export default {
+  components: {
+    TheHeader
+  }
+}
+</script>
+
 
 <style>
 html {
@@ -17,7 +29,7 @@ html {
   box-sizing: border-box;
 }
 
-*,
+/* *,
 *:before,
 *:after {
   box-sizing: border-box;
@@ -51,5 +63,5 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
-}
+} */
 </style>

@@ -1,0 +1,69 @@
+<template>
+  <b-navbar
+    toggleable="md"
+    type="dark"
+    class="b-navbar">
+    <b-navbar-brand
+      class="b-navbar__brand"
+      to="/">
+      <img
+        src="~/assets/img/logo_text_white.png"
+        alt="Modern Samurai Logo">
+    </b-navbar-brand>
+    <b-navbar-toggle
+      target="nav_collapse"
+      class="ml-auto border-0"/>
+    <b-collapse
+      id="nav_collapse"
+      is-nav>
+      <!-- Right aligned nav items -->
+      <b-navbar-nav
+        class="ml-auto text-center">
+        <b-nav-item
+          v-if="!authenticated"
+          to="/login">Login
+        </b-nav-item>
+        <b-nav-item
+          v-if="!authenticated"
+          to="/signup">Signup
+        </b-nav-item>
+        <b-nav-item-dropdown
+          v-if="authenticated"
+          :text="user"
+          center>
+          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="#">Logout</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+</template>
+
+<script>
+export default {
+  computed: {
+    authenticated() {
+      return false
+      // return this.$store.getters.isAuthenticated
+    },
+    user() {
+      return 'Brian'
+      // return this.$store.getters.user
+    }
+  }
+}
+</script>
+
+<style scoped>
+.b-navbar {
+  position: absolute;
+  width: 100%;
+  background-color: rgba(117, 117, 117, 0.5);
+}
+
+.b-navbar__brand {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+</style>
