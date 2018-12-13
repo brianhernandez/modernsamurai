@@ -53,11 +53,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .b-navbar {
   position: absolute;
   width: 100%;
-  background-color: rgba(117, 117, 117, 0.5);
+  background-color: $header-bg-color;
 }
 
 .b-navbar__brand {
@@ -67,6 +67,6 @@ export default {
 }
 
 .b-navbar__toggle:focus {
-  outline-color: white;
+  outline-color: $white;
 }
 </style>

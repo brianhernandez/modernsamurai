@@ -34,12 +34,12 @@
             <h3>Whoa, That Got Deep Real Quick.  4 Possible Perspectives Of Reality?</h3>
             <p>Yes.  The reality you live in can be viewed in at least 4 different perspectives.  Don't worry, its not complicated.  This is just a way to help expose you to other routines, practices, strategies, hacks etc. etc. that you may not be aware of that can help you improve your life.</p>
             <h3>Why?</h3>
-            <p>Hi, my name is Brian.  I'm making this app because I want to help people improve their lives and be the best version of themselves that they can be.  😄✌🏼</p>
+            <p>Hi, my name is Brian.  I'm making this app because I want to help people improve their lives and be the best version of themselves that they can be.</p>
+            <p class="index-content__emojis">😄✌🏼</p>
           </b-col>
         </b-row>
       </b-container>
     </section>
-    <footer>Footer Here</footer>
     <div/>
 </div></template>
 
@@ -104,6 +104,11 @@ export default {
 
     h3 {
       margin: 40px 0;
+    }
+
+    .index-content__emojis {
+      text-align: center;
+      font-size: 2rem;
     }
   }
 }
