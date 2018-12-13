@@ -37,6 +37,7 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
     'bootstrap-vue/nuxt'
   ],
   /*
@@ -44,6 +45,9 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+  styleResources: {
+    scss: ['@/assets/styles/*.scss']
   },
 
   /*

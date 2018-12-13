@@ -12,7 +12,7 @@
     </b-navbar-brand>
     <b-navbar-toggle
       target="nav_collapse"
-      class="ml-auto border-0"/>
+      class="ml-auto border-0 b-navbar__toggle"/>
     <b-collapse
       id="nav_collapse"
       is-nav>
@@ -64,5 +64,9 @@ export default {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.b-navbar__toggle:focus {
+  outline-color: white;
 }
 </style>

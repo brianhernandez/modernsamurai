@@ -16,52 +16,109 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
+// Issues with build process, the following responsive typography
+// system should be registered globally.  Placed here temporarily.
+$font-size-base: 1rem;
+
+$type-scales: (
+  minor-second: 1.067,
+  major-second: 1.125,
+  minor-third: 1.2,
+  major-third: 1.25,
+  perfect-fourth: 1.333,
+  augmented-fourth: 1.414,
+  perfect-fifth: 1.5,
+  golden-ratio: 1.618
+);
+
+$heading-type-scale-base: minor-third;
+$display-type-scale-base: minor-third;
+
+@function check-type-scale-value($scale) {
+  @if map-has-key($type-scales, $scale) {
+    @return map-get($type-scales, $scale);
+  } @else if type-of($scale) == number and unitless($scale) {
+    @return $scale;
+  } @else {
+    @error "Sorry, `#{$scale}` is not a unitless number value or a pre-defined key in the $type-scales map.";
+  }
+}
+
+@mixin create-heading-type-scale($scale) {
+  $the-heading-type-scale: check-type-scale-value($scale);
+
+  $font-size-h6: $font-size-base;
+  $font-size-h5: $font-size-h6 * $the-heading-type-scale;
+  $font-size-h4: $font-size-h5 * $the-heading-type-scale;
+  $font-size-h3: $font-size-h4 * $the-heading-type-scale;
+  $font-size-h2: $font-size-h3 * $the-heading-type-scale;
+  $font-size-h1: $font-size-h2 * $the-heading-type-scale;
+  $font-size-display-base: $font-size-h1 !global;
+
+  h1,
+  .h1 {
+    font-size: $font-size-h1;
+  }
+  h2,
+  .h2 {
+    font-size: $font-size-h2;
+  }
+  h3,
+  .h3 {
+    font-size: $font-size-h3;
+  }
+  h4,
+  .h4 {
+    font-size: $font-size-h4;
+  }
+  h5,
+  .h5 {
+    font-size: $font-size-h5;
+  }
+  h6,
+  .h6 {
+    font-size: $font-size-h6;
+  }
+}
+
+@mixin create-display-type-scale($scale) {
+  $the-display-type-scale: check-type-scale-value($scale);
+
+  $font-size-display-4: $font-size-display-base + $font-size-base;
+  $font-size-display-3: $font-size-display-4 * $the-display-type-scale;
+  $font-size-display-2: $font-size-display-3 * $the-display-type-scale;
+  $font-size-display-1: $font-size-display-2 * $the-display-type-scale;
+
+  .display-4 {
+    font-size: $font-size-display-4;
+  }
+  .display-3 {
+    font-size: $font-size-display-3;
+  }
+  .display-2 {
+    font-size: $font-size-display-2;
+  }
+  .display-1 {
+    font-size: $font-size-display-1;
+  }
+}
+
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+  font-size: 14px;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 }
 
-/* *,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
+@include create-heading-type-scale($heading-type-scale-base);
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
+@include create-display-type-scale($display-type-scale-base);
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+@media (min-width: 768px) {
+  @include create-heading-type-scale(minor-third);
 }
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-} */
 </style>

@@ -27,6 +27,7 @@
               size="lg"
               class="index-header__button">Signup</b-button>
           </div>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem unde harum enim at, iusto, exercitationem nihil debitis vel laudantium facilis aperiam voluptatibus atque quis delectus repellat. Illo, nulla perferendis?</p>
         </div>
       </section>
     </header>
@@ -45,7 +46,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
+// @import '~assets/styles/typography.scss';
+
 .index-header {
   background: grey url('~assets/img/zen_garden.jpg') no-repeat fixed;
   background-size: cover;
@@ -55,10 +58,12 @@ export default {
   background-color: transparent;
   border: 1px solid white;
   border-radius: 0;
-}
 
-.index-header__button:hover {
-  /* background-color: rgba(255, 255, 255, 0.75); */
+  &:hover {
+    // background-color: rgb(221, 63, 63);
+    background-color: white;
+    color: grey;
+  }
 }
 
 .container {
@@ -67,27 +72,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
   color: white;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
