@@ -104,7 +104,9 @@ $display-type-scale-base: minor-third;
   }
 }
 
-html {
+html,
+body {
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   @media (min-width: 768px) {
     font-size: 16px;
