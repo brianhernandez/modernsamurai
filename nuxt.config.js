@@ -55,6 +55,10 @@ module.exports = {
   styleResources: {
     scss: ['@/assets/styles/*.scss']
   },
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
 
   /*
   ** Build configuration

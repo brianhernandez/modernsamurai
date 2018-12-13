@@ -58,6 +58,8 @@ export default {
   position: absolute;
   width: 100%;
   background-color: $header-bg-color;
+  // background-color: rgb(65, 65, 65);
+  z-index: 100;
 }
 
 .b-navbar__brand {
