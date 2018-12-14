@@ -1,6 +1,8 @@
-# modernsamurai.io
+# ModernSamurai.io
 
 > A simple web app for tracking and exposing you to self-improvement strategies.
+#### [https://modern-samurai.firebaseapp.com/](https://modern-samurai.firebaseapp.com/)
+#### Built with [Vue.js](https://vuejs.org), [Nuxt.js](https://nuxtjs.org) and [Firebase](http://firebase.com)
 
 ## Build Setup
 
