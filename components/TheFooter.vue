@@ -3,14 +3,15 @@
     <b-container>
       <b-row>
         <b-col>
-          <p>&copy; {{ returnCurrentDate() | filterYear }}</p>
+          <!-- <p>Copyright &copy; {{ returnCurrentDate() | filterYear }} Modern Samurai - TEST API KEY: {{ api_key }}</p> -->
+          <p>TEST API KEY: {{ api_key }}</p>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
           <a
             href="https://brianhernandez.net"
-            class="footer__copy-date">Designed &amp; Developmend by Brian Hernandez</a>
+            class="footer__by-line">Designed &amp; Developmend by Brian Hernandez</a>
         </b-col>
       </b-row>
     </b-container>
@@ -19,6 +20,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      api_key: process.env.FB_API_KEY
+    }
+  },
   methods: {
     returnCurrentDate() {
       return new Date()
@@ -34,7 +40,7 @@ export default {
   color: $header-tx-color;
   text-align: center;
 
-  .footer__copy-date {
+  .footer__by-line {
     color: $footer-tx-color;
     font-size: 10px;
     border-bottom: 1px solid transparent;

@@ -10,13 +10,9 @@
         </h2>
         <div class="links index-header__links">
           <b-button
-            to="/login"
+            to="/auth"
             size="lg"
-            class="index-header__button">Login</b-button>
-          <b-button
-            to="/signup"
-            size="lg"
-            class="index-header__button">Signup</b-button>
+            class="index-header__button">Login/Signup</b-button>
         </div>
         <p class="lead index-header__lead">A simple web app for tracking and exposing you to self-improvement strategies.</p>
       </div>
@@ -35,7 +31,8 @@
             <p>Yes.  The reality you live in can be viewed in at least 4 different perspectives.  Don't worry, its not complicated.  This is just a way to help expose you to other routines, practices, strategies, hacks etc. etc. that you may not be aware of that can help you improve your life.</p>
             <h3>Why?</h3>
             <p>Hi, my name is Brian.  I'm making this app because I want to help people improve their lives and be the best version of themselves that they can be.</p>
-            <p class="index-content__emojis">😄✌🏼</p>
+            <p>Built with  <a href="https://vuejs.org/">Vue.js</a>, <a href="https://nuxtjs.org">Nuxt.js</a> and <a href="http://firebase.com">Firebase</a>.</p>
+            <p class="index-content__emojis">Thanks for stopping by. <br>😄✌🏼</p>
           </b-col>
         </b-row>
       </b-container>
