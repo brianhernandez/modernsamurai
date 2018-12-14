@@ -1,6 +1,6 @@
 # modernsamurai.io
 
-> My outstanding Nuxt.js project
+> A simple web app for tracking and exposing you to self-improvement strategies.
 
 ## Build Setup
 

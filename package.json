@@ -1,7 +1,7 @@
 {
   "name": "modernsamurai.io",
   "version": "1.0.0",
-  "description": "My outstanding Nuxt.js project",
+  "description": "A simple web app for tracking and exposing you to self-improvement strategies.",
   "author": "Brian Hernandez",
   "private": true,
   "scripts": {
