@@ -45,12 +45,12 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     '@nuxtjs/dotenv',
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: process.env.GA_ID || ''
-      }
-    ],
+    // [
+    //   '@nuxtjs/google-analytics',
+    //   {
+    //     id: process.env.GA_ID || ''
+    //   }
+    // ],
     'bootstrap-vue/nuxt'
   ],
   /*
