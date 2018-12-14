@@ -83,10 +83,11 @@ export default {
       background-color: transparent;
       border: 1px solid white;
       border-radius: 0;
+      transition: color 0.15s, background-color 0.15s;
 
       &:hover {
         background-color: white;
-        color: darken(grey, 30%);
+        color: $text-color;
       }
     }
   }

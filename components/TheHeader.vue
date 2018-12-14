@@ -21,11 +21,7 @@
         class="ml-auto text-center">
         <b-nav-item
           v-if="!authenticated"
-          to="/login">Login
-        </b-nav-item>
-        <b-nav-item
-          v-if="!authenticated"
-          to="/signup">Signup
+          to="/auth">Login/Signup
         </b-nav-item>
         <b-nav-item-dropdown
           v-if="authenticated"
