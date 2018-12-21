@@ -5,7 +5,14 @@ const createStore = () => {
     state: () => ({
       token: null
     }),
-    mutations: {},
+    mutations: {
+      SET_TOKEN(state, token) {
+        state.token = token
+      },
+      CLEAR_TOKEN(state) {
+        state.token = null
+      }
+    },
     actions: {
       authenticateUser(vuexContext, authData) {
         let authUrl =
@@ -36,11 +43,20 @@ const createStore = () => {
             )
             // console.log(result.expiresIn, result.expiresIn * 1000)
             // vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
-            return this.$axios.$post('http://localhost:3000/api/track-data', {
-              data: 'Authenticated!'
-            })
+            // return this.$axios.$post('http://localhost:3000/api/track-data', {
+            //   data: 'Authenticated!'
+            // })
           })
           .catch(e => console.log(e))
+      },
+      logout(vuexContext) {
+        vuexContext.commit('CLEAR_TOKEN')
+        Cookie.remove('jwt')
+        Cookie.remove('expirationDate')
+        if (process.client) {
+          localStorage.removeItem('token')
+          localStorage.removeItem('tokenExpiration')
+        }
       }
     },
     getters: {

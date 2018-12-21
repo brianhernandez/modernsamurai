@@ -28,7 +28,7 @@
           :text="user"
           right>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Logout</b-dropdown-item>
+          <b-dropdown-item @click="logout">Logout</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -44,6 +44,11 @@ export default {
     user() {
       return 'Brian'
       // return this.$store.getters.user
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
     }
   }
 }

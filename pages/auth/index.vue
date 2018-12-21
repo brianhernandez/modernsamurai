@@ -10,6 +10,7 @@
       <AppControlInput
         v-model="password"
         type="password"
+        autocapitalize="off"
         class="auth__input">Password</AppControlInput>
       <AppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
       <AppButton

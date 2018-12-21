@@ -1,4 +1,5 @@
 const pkg = require('./package')
+const GAID = process.env.GA_ID
 
 module.exports = {
   mode: 'universal',
@@ -45,13 +46,13 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     '@nuxtjs/dotenv',
+    'bootstrap-vue/nuxt'
     // [
     //   '@nuxtjs/google-analytics',
     //   {
     //     id: process.env.GA_ID || ''
     //   }
-    // ],
-    'bootstrap-vue/nuxt'
+    // ]
   ],
   /*
   ** Axios module configuration
