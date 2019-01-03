@@ -1,5 +1,4 @@
 const pkg = require('./package')
-const GAID = process.env.GA_ID
 
 module.exports = {
   mode: 'universal',
@@ -36,7 +35,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/filters.js'],
+  plugins: ['@/plugins/filters'],
 
   /*
   ** Nuxt.js modules

@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import Cookie from 'js-cookie'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -30,6 +31,7 @@ const createStore = () => {
             returnSecureToken: true
           })
           .then(result => {
+            console.log(result)
             vuexContext.commit('SET_TOKEN', result.idToken)
             localStorage.setItem('token', result.idToken)
             localStorage.setItem(
@@ -47,7 +49,12 @@ const createStore = () => {
             //   data: 'Authenticated!'
             // })
           })
-          .catch(e => console.log(e))
+          .catch(e => {
+            console.log(e.response.data.error.message)
+            if (e.response.data.error.message === 'EMAIL_EXISTS') {
+              throw new Error('EMAIL_EXISTS')
+            }
+          })
       },
       logout(vuexContext) {
         vuexContext.commit('CLEAR_TOKEN')

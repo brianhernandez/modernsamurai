@@ -3,21 +3,39 @@
     <form
       class="auth__form-container"
       @submit.prevent="onSubmit">
-      <AppControlInput
-        v-model="email"
-        type="email"
-        class="auth__input">E-Mail Address</AppControlInput>
-      <AppControlInput
-        v-model="password"
-        type="password"
-        autocapitalize="off"
-        class="auth__input">Password</AppControlInput>
-      <AppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
-      <AppButton
-        type="button"
-        btn-style="inverted"
-        style="margin-left: 10px"
-        @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
+      <transition-group
+        name="el-fade"
+        mode="out-in">
+        <AppControlInput
+          key="email"
+          v-model="email"
+          type="email"
+          class="auth__input animated">E-Mail Address</AppControlInput>
+        <AppControlInput
+          key="password"
+          v-model="password"
+          type="password"
+          autocapitalize="off"
+          class="auth__input animated">Password</AppControlInput>
+        <AppControlInput
+          v-show="!isLogin"
+          key="confirmPassword"
+          v-model="confirmPassword"
+          type="password"
+          autocapitalize="off"
+          class="auth__input">Confirm Password</AppControlInput>
+        <AppButton
+          key="submitButton"
+          class="animated"
+          type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
+        <AppButton
+          key="toggleButton"
+          type="button"
+          btn-style="inverted"
+          class="animated"
+          style="margin-left: 10px"
+          @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
+      </transition-group>
     </form>
   </div>
 </template>
@@ -35,7 +53,8 @@ export default {
     return {
       isLogin: true,
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     }
   },
   methods: {
@@ -47,7 +66,13 @@ export default {
           password: this.password
         })
         .then(() => {
-          this.$router.push('/admin')
+          this.$router.push('/app')
+        })
+        .catch(e => {
+          console.log(e)
+          if (e.message === 'EMAIL_EXISTS') {
+            console.log('Email Already exists: ', e.message)
+          }
         })
     }
   }
@@ -67,6 +92,24 @@ export default {
   .auth__form-container {
     background-color: $form-bg-color;
     padding: 20px;
+  }
+
+  .el-fade-enter-active,
+  .el-fade-leave-active {
+    transition: opacity 0.3s;
+  }
+
+  .el-fade-leave-active {
+    position: absolute;
+  }
+
+  .el-fade-enter,
+  .el-fade-leave-to {
+    opacity: 0;
+  }
+
+  .animated {
+    transition: all 0.3s;
   }
 }
 </style>
