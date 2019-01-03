@@ -3,8 +3,7 @@
     <b-container>
       <b-row>
         <b-col>
-          <!-- <p>Copyright &copy; {{ returnCurrentDate() | filterYear }} Modern Samurai - TEST API KEY: {{ api_key }}</p> -->
-          <p>TEST API KEY: {{ api_key }}</p>
+          <p>Copyright &copy; {{ returnCurrentDate() | filterYear }} Modern Samurai</p>
         </b-col>
       </b-row>
       <b-row>
@@ -21,9 +20,7 @@
 <script>
 export default {
   data() {
-    return {
-      api_key: process.env.FB_API_KEY
-    }
+    return {}
   },
   methods: {
     returnCurrentDate() {
