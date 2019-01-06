@@ -45,7 +45,14 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     '@nuxtjs/dotenv',
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    [
+      'nuxt-validate',
+      {
+        lang: 'en'
+        // regular vee-validate options
+      }
+    ]
     // [
     //   '@nuxtjs/google-analytics',
     //   {

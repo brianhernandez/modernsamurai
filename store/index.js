@@ -53,6 +53,11 @@ const createStore = () => {
             console.log(e.response.data.error.message)
             if (e.response.data.error.message === 'EMAIL_EXISTS') {
               throw new Error('EMAIL_EXISTS')
+            } else if (
+              e.response.data.error.message === 'INVALID_PASSWORD' ||
+              e.response.data.error.message === 'EMAIL_NOT_FOUND'
+            ) {
+              throw new Error('INVALID_LOGIN')
             }
           })
       },
