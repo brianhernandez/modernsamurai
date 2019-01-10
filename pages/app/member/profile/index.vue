@@ -3,7 +3,10 @@
 </template>
 
 <script>
-export default {}
+export default {
+  layout: 'authenticated',
+  middleware: ['auth']
+}
 </script>
 
 <style scoped>

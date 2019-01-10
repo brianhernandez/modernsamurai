@@ -87,11 +87,11 @@ export default {
         .catch(e => {
           this.loginError = true
           if (e.message === 'EMAIL_EXISTS') {
-            this.errorMessage = 'This email already exists'
+            this.errorMessage = 'That email already exists'
           } else if (e.message === 'INVALID_LOGIN') {
             this.errorMessage = 'Invalid login'
           } else {
-            console.log(e.message)
+            this.errorMessage = e.message
           }
         })
     },
@@ -99,15 +99,6 @@ export default {
       this.loginError = false
       this.errorMessage = ''
     }
-    // testinput() {
-    //   // console.log(this.$validator._base.fields.items)
-    //   // console.log(this.$validator._base.fields.items[0].validity)
-    //   // console.log(this.$validator._base.fields.items[0])
-    //   console.log(
-    //     Object.keys(this.fields).some(key => this.fields[key].validated)
-    //   )
-    //   console.log(Object.keys(this.fields).some(key => this.fields[key].valid))
-    // }
   }
 }
 </script>

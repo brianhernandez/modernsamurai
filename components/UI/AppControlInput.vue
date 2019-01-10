@@ -1,9 +1,11 @@
 <template>
   <div class="app-control-input">
     <label class="app-control-input__label"><slot /></label>
-    <!-- This needs to be refacted once we know Vee Validate better -->
+    <!-- This needs to be refactored once we know Vee Validate better, -->
+    <!-- submit button not disabling while form is invalid. -->
     <!-- Need to dynamically set the v-validate attribute depending -->
-    <!-- On the type of input field and validation rules needed -->
+    <!-- on the type of input field and validation rules needed. -->
+    <!-- Form styles needs to be separated out from login page styling too. -->
     <input
       v-if="controlType === 'input'"
       v-bind="$attrs"
