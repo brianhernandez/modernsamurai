@@ -54,6 +54,7 @@ import AppButton from '~/components/UI/AppButton'
 import AppControlInput from '~/components/UI/AppControlInput'
 
 export default {
+  middleware: ['push-to-app'],
   components: {
     AppButton,
     AppControlInput

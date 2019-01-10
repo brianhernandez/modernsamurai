@@ -74,7 +74,9 @@ module.exports = {
     name: 'fade',
     mode: 'out-in'
   },
-
+  router: {
+    middleware: 'init-auth'
+  },
   /*
   ** Build configuration
   */
