@@ -2,8 +2,8 @@
   <b-button
     :class="btnStyle"
     v-bind="$attrs"
+    :size="btnSize"
     class="b-button"
-    size="lg"
     v-on="$listeners"><slot /></b-button>
 </template>
 
@@ -12,6 +12,10 @@ export default {
   name: 'AppButton',
   props: {
     btnStyle: {
+      type: String,
+      default: ''
+    },
+    btnSize: {
       type: String,
       default: ''
     }

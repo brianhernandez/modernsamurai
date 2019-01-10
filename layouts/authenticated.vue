@@ -1,7 +1,7 @@
 <template>
   <div>
     <TheHeader />
-    <p class="auth-message">AUTHENTICATED LAYOUT</p>
+    <!-- <p class="auth-message">AUTHENTICATED LAYOUT</p> -->
     <nuxt/>
     <TheFooter />
   </div>
