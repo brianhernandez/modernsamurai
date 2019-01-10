@@ -42,7 +42,7 @@ export default {
   align-items: center;
   flex-flow: column;
   padding-top: 140px;
-  padding-bottom: 140px;
+  padding-bottom: 120px;
   text-align: center;
 
   .profile__avatar {
@@ -63,13 +63,6 @@ export default {
         max-width: 500px;
       }
     }
-  }
-  .profile__editButton {
-    border-radius: none;
-
-    // &.save-mode {
-    //   background-color:
-    // }
   }
 }
 </style>
