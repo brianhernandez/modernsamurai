@@ -7,8 +7,8 @@
     <p>email@mail.com</p>
     <p class="profile__quote">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis necessitatibus recusandae vitae alias.</p>
     <AppButton
-      :class="['profile__editButton', {'bg-success': !editMode}]"
-      :btn-size="sm"
+      :class="['profile__editButton', {'bg-success': editMode}]"
+      btn-size="sm"
       @click="editMode=!editMode">{{ toggleButtonText }} Profile</AppButton>
   </main>
 </template>
@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     toggleButtonText() {
-      return this.editMode ? 'Edit' : 'Save'
+      return this.editMode ? 'Save' : 'Edit'
     }
   }
 }

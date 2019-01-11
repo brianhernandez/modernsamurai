@@ -4,7 +4,8 @@ import Cookie from 'js-cookie'
 const createStore = () => {
   return new Vuex.Store({
     state: () => ({
-      token: null
+      token: null,
+      user: null
     }),
     mutations: {
       SET_TOKEN(state, token) {
@@ -12,6 +13,9 @@ const createStore = () => {
       },
       CLEAR_TOKEN(state) {
         state.token = null
+      },
+      SET_USER(state, user) {
+        state.user = user
       }
     },
     actions: {
@@ -43,6 +47,10 @@ const createStore = () => {
               'expirationDate',
               new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
             )
+
+            if (!authData.isLogin) {
+              vuexContext.dispatch('createUser', authData.email)
+            }
           })
           .catch(e => {
             console.log(e.response.data.error.message)
@@ -55,6 +63,19 @@ const createStore = () => {
               throw new Error('INVALID_LOGIN')
             }
           })
+      },
+      createUser(vuexContext, email) {
+        console.log('this is the email to send over: ', email)
+        let postUrl = `https://modern-samurai.firebaseio.com/db.json?auth=${
+          vuexContext.state.token
+        }`
+        return this.$axios
+          .$post(postUrl, { email: email })
+          .then(result => {
+            console.log(result)
+            vuexContext.commit('SET_USER', { email: email })
+          })
+          .catch(e => console.log(e))
       },
       initAuth(vuexContext, request) {
         let token

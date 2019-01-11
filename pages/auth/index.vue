@@ -32,11 +32,13 @@
           key="submitButton"
           :disabled="formIsInvalid"
           class="auth__button animated"
+          btn-size="lg"
           type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
         <AppButton
           key="toggleButton"
           type="button"
           btn-style="inverted"
+          btn-size="lg"
           class="auth__button animated"
           style="margin-left: 10px"
           @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
