@@ -20,13 +20,13 @@ const createStore = () => {
     },
     actions: {
       authenticateUser(vuexContext, authData) {
-        let authUrl =
-          'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' +
+        let authUrl = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${
           process.env.FB_API_KEY
+        }`
         if (!authData.isLogin) {
-          authUrl =
-            'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' +
+          authUrl = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${
             process.env.FB_API_KEY
+          }`
         }
         return this.$axios
           .$post(authUrl, {
@@ -49,7 +49,10 @@ const createStore = () => {
             )
 
             if (!authData.isLogin) {
-              vuexContext.dispatch('createUser', authData.email)
+              vuexContext.dispatch('createUser', {
+                uid: result.localId,
+                email: authData.email
+              })
             }
           })
           .catch(e => {
@@ -64,16 +67,18 @@ const createStore = () => {
             }
           })
       },
-      createUser(vuexContext, email) {
-        console.log('this is the email to send over: ', email)
-        let postUrl = `https://modern-samurai.firebaseio.com/db.json?auth=${
-          vuexContext.state.token
-        }`
+      createUser(vuexContext, userObject) {
+        let putUrl = `https://modern-samurai.firebaseio.com/users/${
+          userObject.uid
+        }.json`
         return this.$axios
-          .$post(postUrl, { email: email })
+          .$put(putUrl, { email: userObject.email })
           .then(result => {
-            console.log(result)
-            vuexContext.commit('SET_USER', { email: email })
+            console.log('response from trying to add to database:', result)
+            vuexContext.commit('SET_USER', {
+              uid: userObject.uid,
+              email: userObject.email
+            })
           })
           .catch(e => console.log(e))
       },
