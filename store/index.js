@@ -42,11 +42,13 @@ const createStore = () => {
               'tokenExpiration',
               new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
             )
+            localStorage.setItem('uid', result.localId)
             Cookie.set('jwt', result.idToken)
             Cookie.set(
               'expirationDate',
               new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
             )
+            Cookie.set('uid', result.localId)
 
             if (!authData.isLogin) {
               vuexContext.dispatch('createUser', {
@@ -82,9 +84,28 @@ const createStore = () => {
           })
           .catch(e => console.log(e))
       },
+      getUserData(vuexContext, authObject) {
+        let getUrl = `https://modern-samurai.firebaseio.com/users/${
+          authObject.uid
+        }.json`
+        return this.$axios
+          .$get(getUrl)
+          .then(result => {
+            console.log(
+              'response from trying to retrieve user from database:',
+              result
+            )
+            vuexContext.commit('SET_USER', {
+              uid: authObject.uid,
+              email: result.email
+            })
+          })
+          .catch(e => console.log(e))
+      },
       initAuth(vuexContext, request) {
         let token
         let expirationDate
+        let uid
 
         if (request) {
           if (!request.headers.cookie) {
@@ -93,7 +114,13 @@ const createStore = () => {
           const jwtCookie = request.headers.cookie
             .split(';')
             .find(c => c.trim().startsWith('jwt='))
+          const uidCookie = request.headers.cookie
+            .split(';')
+            .find(c => c.trim().startsWith('uid='))
           if (!jwtCookie) {
+            return
+          }
+          if (!uidCookie) {
             return
           }
           token = jwtCookie.split('=')[1]
@@ -101,9 +128,11 @@ const createStore = () => {
             .split(';')
             .find(c => c.trim().startsWith('expirationDate='))
             .split('=')[1]
+          uid = uidCookie.split('=')[1]
         } else if (process.client) {
           token = localStorage.getItem('token')
           expirationDate = localStorage.getItem('tokenExpiration')
+          uid = localStorage.getItem('uid')
         }
         if (new Date().getTime() > +expirationDate || !token) {
           console.log('No token or invalid token')
@@ -111,6 +140,8 @@ const createStore = () => {
           return
         }
         vuexContext.commit('SET_TOKEN', token)
+        console.log('the uid is: ', uid)
+        vuexContext.dispatch('getUserData', { token: token, uid: uid })
       },
       logout(vuexContext) {
         vuexContext.commit('CLEAR_TOKEN')
