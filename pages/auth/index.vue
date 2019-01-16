@@ -116,8 +116,17 @@ export default {
   align-items: center;
   text-align: center;
 
-  .auth__input:not(:first-of-type) {
-    margin-top: 20px;
+  .auth__input {
+    label {
+      color: $white;
+    }
+
+    input {
+    }
+
+    &:not(:first-of-type) {
+      margin-top: 20px;
+    }
   }
 
   .auth__form-container {

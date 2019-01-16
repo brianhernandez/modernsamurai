@@ -2,34 +2,110 @@
   <main class="profile">
     <h1 class="profile__heading">Your Member Profile</h1>
     <div class="profile__avatar"/>
-    <p>First Lastname</p>
-    <p>35 Years Old</p>
-    <p>email@mail.com</p>
-    <p class="profile__quote">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis necessitatibus recusandae vitae alias.</p>
+    <transition
+      name="el-fade"
+      mode="out-in">
+      <div
+        v-if="!editMode"
+        key="profileDisplay"
+        class="">
+        <p>{{ userFirstName }} {{ userLasName }}</p>
+        <p>{{ userDOB }}</p>
+        <p>{{ userEmail }}</p>
+        <p class="profile__quote">{{ userProfileQuote }}</p>
+      </div>
+      <div
+        v-else
+        key="profileEdit"
+        class="">
+        <!-- <AppControlInput>First Name</AppControlInput> -->
+        <div>
+          <AppControlInput
+            key="firstName"
+            v-model="firstName"
+            control-type="input"
+            name="firstName"
+            class="profile__input">First Name</AppControlInput>
+          <AppControlInput
+            key="lastName"
+            v-model="lastName"
+            control-type="input"
+            name="lastName"
+            class="profile__input">Last Name</AppControlInput>
+        </div>
+        <div>
+          <AppControlInput
+            key="dob"
+            v-model="dob"
+            control-type="date"
+            name="dob"
+            class="profile__input">Date of Birth</AppControlInput>
+        </div>
+        <div>
+          <AppControlInput
+            key="profileQuote"
+            v-model="profileQuote"
+            control-type="textarea"
+            name="profileQuote"
+            class="profile__input">Profile Quote</AppControlInput>
+        </div>
+      </div>
+    </transition>
     <AppButton
-      :class="['profile__editButton', {'bg-success': editMode}]"
-      btn-size="sm"
-      @click="editMode=!editMode">{{ toggleButtonText }} Profile</AppButton>
+      :class="['profile__editSaveButton', {'bg-success': editMode}]"
+      type="{submit: editMode}"
+      @click="sendUserData(); editMode=!editMode">{{ toggleButtonText }} Profile</AppButton>
   </main>
 </template>
 
 <script>
 import AppButton from '~/components/UI/AppButton'
+import AppControlInput from '~/components/UI/AppControlInput'
 
 export default {
   layout: 'authenticated',
   middleware: ['auth'],
   components: {
-    AppButton
+    AppButton,
+    AppControlInput
   },
   data() {
     return {
-      editMode: false
+      editMode: false,
+      firstName: null,
+      lastName: null,
+      dob: null,
+      profileQuote: null
     }
   },
   computed: {
     toggleButtonText() {
       return this.editMode ? 'Save' : 'Edit'
+    },
+    userFirstName() {
+      return this.$store.getters.user.firstName || 'No First Name'
+    },
+    userLasName() {
+      return this.$store.getters.user.lastName || 'No Last Name'
+    },
+    userDOB() {
+      return this.$store.getters.user.dob || 'No Age'
+    },
+    userEmail() {
+      return this.$store.getters.user.email || 'No Email'
+    },
+    userProfileQuote() {
+      return (
+        this.$store.state.user.profileQuote ||
+        'No Profile Quote Has Been Given For This Account'
+      )
+    }
+  },
+  methods: {
+    sendUserData() {
+      if (this.editMode === true) {
+        console.log('send user data')
+      }
     }
   }
 }
@@ -48,7 +124,7 @@ export default {
   .profile__avatar {
     width: 150px;
     height: 150px;
-    margin: 15px 0;
+    margin: 30px 0;
     border-radius: 50%;
     background-image: url('~assets/img/blank_avatar.png');
     background-size: cover;
@@ -63,6 +139,26 @@ export default {
         max-width: 500px;
       }
     }
+  }
+
+  .profile__input {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+
+  .profile__editSaveButton {
+    margin-top: 40px;
+  }
+
+  .el-fade-enter-active,
+  .el-fade-leave-active {
+    transition: opacity 0.3s;
+  }
+
+  .el-fade-enter,
+  .el-fade-leave-to {
+    opacity: 0;
   }
 }
 </style>

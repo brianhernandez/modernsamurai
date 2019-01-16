@@ -5,7 +5,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: () => ({
       token: null,
-      user: null
+      user: {}
     }),
     mutations: {
       SET_TOKEN(state, token) {
@@ -74,12 +74,22 @@ const createStore = () => {
           userObject.uid
         }.json`
         return this.$axios
-          .$put(putUrl, { email: userObject.email })
+          .$put(putUrl, {
+            email: userObject.email,
+            firstName: null,
+            lastName: null,
+            dob: null,
+            profileQuote: null
+          })
           .then(result => {
             console.log('response from trying to add to database:', result)
             vuexContext.commit('SET_USER', {
               uid: userObject.uid,
-              email: userObject.email
+              email: userObject.email,
+              firstName: null,
+              lastName: null,
+              dob: null,
+              profileQuote: null
             })
           })
           .catch(e => console.log(e))
@@ -91,13 +101,13 @@ const createStore = () => {
         return this.$axios
           .$get(getUrl)
           .then(result => {
-            console.log(
-              'response from trying to retrieve user from database:',
-              result
-            )
             vuexContext.commit('SET_USER', {
               uid: authObject.uid,
-              email: result.email
+              email: result.email,
+              firstName: authObject.firstName,
+              lastName: authObject.lastName,
+              dob: authObject.dob,
+              profileQuote: authObject.profileQuote
             })
           })
           .catch(e => console.log(e))
@@ -140,7 +150,6 @@ const createStore = () => {
           return
         }
         vuexContext.commit('SET_TOKEN', token)
-        console.log('the uid is: ', uid)
         vuexContext.dispatch('getUserData', { token: token, uid: uid })
       },
       logout(vuexContext) {
@@ -154,6 +163,9 @@ const createStore = () => {
       }
     },
     getters: {
+      user(state) {
+        return state.user
+      },
       isAuthenticated(state) {
         return state.token != null
       }

@@ -38,11 +38,19 @@
       :class="['app-control-input__input', {inputError: errors.has(controlType)}]"
       type="password"
       @input="$emit('input', $event.target.value)">
-    <text-area
+    <input
+      v-validate="'required'"
+      v-if="controlType === 'date'"
+      v-bind="$attrs"
+      :value="value"
+      :class="['app-control-input__input', {inputError: errors.has(controlType)}]"
+      type="date"
+      @input="$emit('input', $event.target.value)">
+    <textarea
       v-if="controlType === 'textarea'"
       :value="value"
       :class="['app-control-input__textarea', {inputError: errors.has(controlType)}]"
-      rows="10"
+      cols="33"
       @input="$emit('input', $event.target.value)"/>
     <span
       v-show="errors.has(controlType)"
@@ -73,7 +81,6 @@ export default {
   border: none;
   background-color: $inputcontrol-bg-color;
   padding: 10px 8px;
-  margin: 20px 0 0;
   width: 100%;
 
   &.inputError {
@@ -86,7 +93,6 @@ export default {
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 0;
-  color: $white;
 }
 
 .app-control-input__error {
