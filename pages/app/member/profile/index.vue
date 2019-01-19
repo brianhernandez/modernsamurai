@@ -8,7 +8,7 @@
       <div
         v-if="!editMode"
         key="profileDisplay"
-        class="">
+        class="profile__content">
         <p>{{ userFirstName }} {{ userLasName }}</p>
         <p>{{ userDOB }}</p>
         <p>{{ userEmail }}</p>
@@ -23,12 +23,16 @@
           <AppControlInput
             key="firstName"
             v-model="firstName"
+            :placeholder="userFirstName"
+            :value="userFirstName"
             control-type="input"
             name="firstName"
             class="profile__input">First Name</AppControlInput>
           <AppControlInput
             key="lastName"
             v-model="lastName"
+            :placeholder="userLasName"
+            :value="userLasName"
             control-type="input"
             name="lastName"
             class="profile__input">Last Name</AppControlInput>
@@ -45,6 +49,8 @@
           <AppControlInput
             key="profileQuote"
             v-model="profileQuote"
+            :placeholder="userProfileQuote"
+            :value="userProfileQuote"
             control-type="textarea"
             name="profileQuote"
             class="profile__input">Profile Quote</AppControlInput>
@@ -104,7 +110,18 @@ export default {
   methods: {
     sendUserData() {
       if (this.editMode === true) {
-        console.log('send user data')
+        this.$store
+          .dispatch('updateUserData', {
+            ...this.$store.getters.user,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            dob: this.dob,
+            profileQuote: this.profileQuote
+          })
+          .then(() => {
+            this.editMode = false
+          })
+          .catch(e => console.log(e))
       }
     }
   }
@@ -149,6 +166,10 @@ export default {
 
   .profile__editSaveButton {
     margin-top: 40px;
+  }
+
+  .profile__content {
+    font-size: 18px;
   }
 
   .el-fade-enter-active,

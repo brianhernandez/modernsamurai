@@ -10,6 +10,7 @@
       v-if="controlType === 'input'"
       v-bind="$attrs"
       :value="value"
+      :placeholder="placeholder"
       :type="controlType"
       class="app-control-input__input"
       @input="$emit('input', $event.target.value)">
@@ -18,6 +19,7 @@
       v-if="controlType === 'email'"
       v-bind="$attrs"
       :value="value"
+      :placeholder="placeholder"
       :class="['app-control-input__input', {inputError: errors.has(controlType)}]"
       :type="controlType"
       @input="$emit('input', $event.target.value)">
@@ -27,6 +29,7 @@
       ref="password"
       v-bind="$attrs"
       :value="value"
+      :placeholder="placeholder"
       :class="['app-control-input__input', {inputError: errors.has(controlType)}]"
       :type="controlType"
       @input="$emit('input', $event.target.value)">
@@ -35,6 +38,7 @@
       v-if="controlType === 'confirmPassword'"
       v-bind="$attrs"
       :value="value"
+      :placeholder="placeholder"
       :class="['app-control-input__input', {inputError: errors.has(controlType)}]"
       type="password"
       @input="$emit('input', $event.target.value)">
@@ -49,8 +53,9 @@
     <textarea
       v-if="controlType === 'textarea'"
       :value="value"
+      :placeholder="placeholder"
       :class="['app-control-input__textarea', {inputError: errors.has(controlType)}]"
-      cols="33"
+      cols="37"
       @input="$emit('input', $event.target.value)"/>
     <span
       v-show="errors.has(controlType)"
@@ -67,6 +72,10 @@ export default {
       default: 'input'
     },
     value: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
       type: String,
       default: ''
     }

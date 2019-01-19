@@ -55,6 +55,12 @@ const createStore = () => {
                 uid: result.localId,
                 email: authData.email
               })
+            } else {
+              console.log('Getting authenticated user data...')
+              vuexContext.dispatch('getUserData', {
+                token: result.idToken,
+                uid: result.localId
+              })
             }
           })
           .catch(e => {
@@ -101,14 +107,33 @@ const createStore = () => {
         return this.$axios
           .$get(getUrl)
           .then(result => {
+            console.log('We got the user data, here it is: ', result)
             vuexContext.commit('SET_USER', {
               uid: authObject.uid,
               email: result.email,
-              firstName: authObject.firstName,
-              lastName: authObject.lastName,
-              dob: authObject.dob,
-              profileQuote: authObject.profileQuote
+              firstName: result.firstName,
+              lastName: result.lastName,
+              dob: result.dob,
+              profileQuote: result.profileQuote
             })
+          })
+          .catch(e => console.log(e))
+      },
+      updateUserData(vuexContext, userObject) {
+        let uid = vuexContext.getters.user.uid
+        let updateUserDataUrl = `https://modern-samurai.firebaseio.com/users/${uid}.json`
+        delete userObject.uid
+
+        console.log('updateUserDataUrl is: ', updateUserDataUrl)
+        console.log('this is: ', this)
+        console.log('vuexContext is: ', vuexContext)
+        console.log('userObject being sent to update records: ', userObject)
+
+        return this.$axios
+          .$put(updateUserDataUrl, userObject)
+          .then(result => {
+            console.log(result)
+            vuexContext.commit('SET_USER', { ...userObject, uid })
           })
           .catch(e => console.log(e))
       },
@@ -145,12 +170,11 @@ const createStore = () => {
           uid = localStorage.getItem('uid')
         }
         if (new Date().getTime() > +expirationDate || !token) {
-          console.log('No token or invalid token')
           vuexContext.dispatch('logout')
           return
         }
         vuexContext.commit('SET_TOKEN', token)
-        vuexContext.dispatch('getUserData', { token: token, uid: uid })
+        // vuexContext.dispatch('getUserData', { token: token, uid: uid })
       },
       logout(vuexContext) {
         vuexContext.commit('CLEAR_TOKEN')
